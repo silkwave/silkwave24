@@ -20,13 +20,12 @@ public class localDateTest {
 
 	public static void main(String[] args) {
 		LocalDate.now(); // 오늘
+
 		LocalDateTime.now(); // 지금
+
 		LocalDate.of(2015, 4, 17); // 2015년4월17일
 		LocalDateTime.of(2015, 4, 17, 23, 23, 50); // 2015년4월17일23시23분50초
-		String aaa = Year.of(2015).atMonth(3).atDay(4).atTime(10, 30).format(DateTimeFormatter.ofPattern("yyMMdd")); // 2015년3월4일
-																														// 10시30분00초
-
-		System.out.println(aaa);
+		Year.of(2015).atMonth(3).atDay(4).atTime(10, 30).format(DateTimeFormatter.ofPattern("yyMMdd")); // 2015년3월4일
 
 		Period.ofYears(2); // 2년간(P2Y)
 		Period.ofMonths(5); // 5개월간(P5M)

@@ -1,14 +1,13 @@
 package util;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
-public class Util {
+public interface Util {
 
-	private static final char hexchar[] = new String("0123456789ABCDEF").toCharArray();
+	static final char hexchar[] = new String("0123456789ABCDEF").toCharArray();
 
 	public static String StringToHexDecimal(String lwString) {
 
@@ -104,30 +103,18 @@ public class Util {
 
 	}
 
-	public static String addDay(String lwDate, int day) throws Exception {
+	public static String addDay(String indate, long day) {
 
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyymmdd");
-		Date date = null;
+		LocalDate date = LocalDate.parse(indate, DateTimeFormatter.BASIC_ISO_DATE);
 
-		Date basedate = sdf.parse(lwDate);
+		LocalDate plusDays = date.plusDays(day); // (오늘 + 1일) = 내일
 
-		cal.setTime(basedate);
-		cal.add(Calendar.DATE, day);
-
-		date = new Date(cal.getTimeInMillis());
-
-		return new String(sdf.format(date));
-
+		return plusDays.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 	}
 
-	public static String getDay() throws Exception {
+	public static String getDay() {
 
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyymmdd");
-		Date date = new Date(cal.getTimeInMillis());
-
-		return new String(sdf.format(date));
+		return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
 	}
 
